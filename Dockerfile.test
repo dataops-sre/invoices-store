@@ -1,0 +1,5 @@
+From python:3.8
+
+COPY requirements-test.txt .
+
+Run pip install --no-cache-dir -r requirements-test.txt

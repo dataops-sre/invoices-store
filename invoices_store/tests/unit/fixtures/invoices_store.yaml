@@ -1,0 +1,44 @@
+- _id: 936dcc1f-d9d6-4a9f-aff5-598d3c7d402d
+  organization: d7558fb7-a652-4fdd-b5bd-f41fc83e0479
+  createdAt: '2021-10-11T09:53:31.339Z'
+  updatedAt: '2021-11-29T13:15:19.500Z'
+  amount:
+    currencyCode: EUR
+    value: 26.3
+  contact:
+    _id: 2a4647e1-cbe3-4016-9d29-f4df229c4ef3
+    iban: DE88100500001310032358
+    name: Client cat
+    organization: d7558fb7-a652-4fdd-b5bd-f41fc83e0479
+  invoiceDate: '2021-10-11T00:00:00.000Z'
+  invoiceId: VR210230898
+
+- _id: 936dcc1f-d9d6-4a9f-aff5-598d3c7d402b
+  organization: d7558fb7-a652-4fdd-b5bd-f41fc83e0479
+  createdAt: '2021-10-11T10:53:31.339Z'
+  updatedAt: '2021-11-29T13:15:19.500Z'
+  amount:
+    currencyCode: EUR
+    value: 36.3
+  contact:
+    _id: 2a4647e1-cbe3-4016-9d29-f4df229c4ef3
+    iban: DE88100500001310032357
+    name: Client cat
+    organization: d7558fb7-a652-4fdd-b5bd-f41fc83e0479
+  invoiceDate: '2021-10-11T00:00:00.000Z'
+  invoiceId: VR210230897
+
+- _id: 936dcc1f-d9d6-4a9f-aff5-598d3c7d402a
+  organization: d7558fb7-a652-4fdd-b5bd-f41fc83e0479
+  createdAt: '2021-10-11T09:53:31.339Z'
+  updatedAt: '2021-11-29T13:15:19.500Z'
+  amount:
+    currencyCode: EUR
+    value: 46.3
+  contact:
+    _id: 2a4647e1-cbe3-4016-9d29-f4df229c4ef5
+    iban: DE88100500001310032356
+    name: Client fox
+    organization: d7558fb7-a652-4fdd-b5bd-f41fc83e0479
+  invoiceDate: '2021-10-11T00:00:00.000Z'
+  invoiceId: VR210230896

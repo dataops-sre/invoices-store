@@ -1,0 +1,41 @@
+#https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml
+version: '2'
+
+services:
+  mongodb:
+    image: docker.io/bitnami/mongodb:4.4
+    environment:
+      MONGODB_ROOT_PASSWORD: passwordroot
+      MONGODB_USERNAME: invoices_store
+      MONGODB_PASSWORD: password123
+      MONGODB_DATABASE: invoices_store
+    ports:
+      - "27017:27017"
+
+  #for local development
+  invoices_store:
+    build:
+      context: .
+    depends_on:
+      - mongodb
+    environment:
+      FLASK_ENV: development
+      MONGODB_HOST: mongodb://mongodb:27017/
+      MONGODB_USERNAME: invoices_store
+      MONGODB_PASSWORD: password123
+      MONGODB_DATABASE: invoices_store
+
+    volumes:
+      - ${PWD}/invoices_store:/invoices_store
+    ports:
+      - "8080:8080"
+
+  #for local unit tests
+  invoices_store_pytests:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    volumes:
+        - .:/mnt
+    working_dir: /mnt/invoices_store
+    entrypoint:  ["pytest", "-rP", "tests/"]

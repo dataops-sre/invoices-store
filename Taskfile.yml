@@ -1,0 +1,42 @@
+# https://taskfile.dev
+
+version: '3'
+
+env:
+  DOCKER_REGISTRY: '{{default  "docker.io" .DOCKER_REGISTRY}}'
+  PROJECT_NAME: invoices_store
+  DOCKER_TAG: '{{default "local" .DOCKER_TAG}}'
+
+tasks:
+
+  default:
+    cmds:
+      - echo 'try, task local.dev'
+    silent: true
+
+  local.dev:
+    summary: |
+      Run the app locally with docker-compose
+      eg. task local.dev
+    cmds:
+      - docker-compose up --remove-orphans --abort-on-container-exit --build invoices_store
+
+  unit-tests:
+    summary: |
+      Run the unit-tests locally with docker-compose
+    cmds:
+      - docker-compose up --abort-on-container-exit --build invoices_store_pytests
+
+  docker.build:
+    summary: |
+      Build docker image for the app
+    cmds:
+      - docker build -t $DOCKER_REGISTRY/$PROJECT_NAME:$DOCKER_TAG .
+
+  install_commit_hook:
+    summary: |
+      install commit hook, run it once.
+    cmds:
+      - pip install pre-commit
+      - pre-commit install
+      - pre-commit run --all-files
