@@ -4,7 +4,7 @@ This Project implements a simple invoices store API, with mongodb as backend.
 It allows operations:
 * On create validate invoice with predefined schema and check for duplicates
 * Update contacts in invoices
-* contact Partiel search 
+* contact Partiel search
 
 Tech stack
 * Taskfile -> A makefile alike runner/build tool
@@ -40,5 +40,5 @@ Current solution implements everything under one single component, Invoices crea
 
 If I have more time I would design the application differently with 3 components:
 1. An API endpoint serve as data collector, it ingests invoice data into a queuing system(e.g Kafka).
-2. A Kafka consumer transform and offload invoices data to S3 as parquet format for data analytic usage and machine learning purpose to build anormaly detection and data suggestion model; another kafka consumer transform and offload data to mongodb or a relational db for client-end usage(transational updates, web application etc) it allows seperation of data-lake and transational data store. 
+2. A Kafka consumer transform and offload invoices data to S3 as parquet format for data analytic usage and machine learning purpose to build anormaly detection and data suggestion model; another kafka consumer transform and offload data to mongodb or a relational db for client-end usage(transational updates, web application etc) it allows seperation of data-lake and transational data store.
 3. An API endpoint to serve persisted model produced by data science team for anormaly detection and data suggestion

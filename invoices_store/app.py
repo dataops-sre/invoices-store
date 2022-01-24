@@ -8,9 +8,11 @@ from main.utils import get_mongodb_collection
 app = Flask(__name__)
 invoices_store = InvoicesStore(get_mongodb_collection())
 
+
 @app.errorhandler(404)
 def not_found(e):
     return make_response(jsonify({"message": "api not found"}), 404)
+
 
 @app.route("/")
 def list_routes():

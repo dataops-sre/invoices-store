@@ -12,6 +12,7 @@ from main.configs import (
     get_contact_schema,
 )
 
+
 def get_mongodb_collection():
     """
     Establish mongodb connection, create DB and collection
@@ -43,6 +44,7 @@ def validate_invoice_with_schema(doc):
     """
     schema = get_invoice_schema()
     jsonschema.validate(instance=doc, schema=schema)
+
 
 def validate_contact_with_schema(doc):
     """

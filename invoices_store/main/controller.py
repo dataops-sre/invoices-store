@@ -17,7 +17,7 @@ class InvoicesStore:
         """
         super(InvoicesStore).__init__()
         # Create index to prevent duplicate insert, according to doc, it is a "create if not exists" statement
-        #collection.create_index([("name", 1)], unique=True, background=True)
+        # collection.create_index([("name", 1)], unique=True, background=True)
         collection.create_index([("contact.name", TEXT)], background=True)
         self.collection = collection
 
@@ -92,8 +92,10 @@ class InvoicesStore:
         # some default result to not repeat over in except
         try:
             validate_contact_with_schema(doc)
-            contact_id = doc['_id']
-            ret = self.collection.update_many({"contact._id": contact_id}, {'$set': {'contact': doc}})
+            contact_id = doc["_id"]
+            ret = self.collection.update_many(
+                {"contact._id": contact_id}, {"$set": {"contact": doc}}
+            )
             res["acknowledged"] = True
             res["ret_code"] = 200
             res["modified_count"] = ret.modified_count
@@ -136,12 +138,17 @@ class InvoicesStore:
         if request_dict:
             organization_id = request_dict["organization"]
             contactName = request_dict["contactName"]
-            cursor = self.collection.find({
-                "contact.organization": organization_id,
-                "$text": {"$search": contactName}
-                },
-                {"score": {"$meta": "textScore"}, "contact.name": 1, "_id": 0},
-                ).sort([("score", {"$meta": "textScore"})]).limit(1)
+            cursor = (
+                self.collection.find(
+                    {
+                        "contact.organization": organization_id,
+                        "$text": {"$search": contactName},
+                    },
+                    {"score": {"$meta": "textScore"}, "contact.name": 1, "_id": 0},
+                )
+                .sort([("score", {"$meta": "textScore"})])
+                .limit(1)
+            )
             res["doc"] = [x for x in cursor]
             if len(res["doc"]) == 0:
                 res["errmsg"] = f"Nothing found with {request_dict}"

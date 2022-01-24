@@ -120,6 +120,7 @@ def get_invoice_schema():
         print(f"Can not load invoice schema, abort {e}")
         sys.exit(1)
 
+
 def get_contact_schema():
     """
     Load contact schema as Json
