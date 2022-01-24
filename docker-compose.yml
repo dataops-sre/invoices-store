@@ -24,11 +24,15 @@ services:
       MONGODB_USERNAME: invoices_store
       MONGODB_PASSWORD: password123
       MONGODB_DATABASE: invoices_store
-
     volumes:
       - ${PWD}/invoices_store:/invoices_store
     ports:
       - "8080:8080"
+    healthcheck:
+      test: ["CMD", "nc", "-vz", "localhost", "8080"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
 
   #for local unit tests
   invoices_store_pytests:
@@ -39,3 +43,18 @@ services:
         - .:/mnt
     working_dir: /mnt/invoices_store
     entrypoint:  ["pytest", "-rP", "tests/"]
+
+  #for local e2e tests
+  invoices_store_e2e_test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    depends_on:
+      invoices_store:
+        condition: service_healthy
+    environment:
+      TEST_URL: "http://invoices_store:8080"
+    volumes:
+        - .:/mnt
+    working_dir: /mnt/invoices_store
+    entrypoint:  ["python", "tests/e2e_test.py"]

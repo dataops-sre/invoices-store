@@ -21,6 +21,8 @@ run app locally: ```task local.dev ```
 
 Unit-tests run: ```task unit-tests```
 
+e2e-tests run: ```task e2e-tests```
+
 ## Development iterations
 
 For the local development, Run with `task local.dev`, befind the scene the application run in a docker container, its dependency to a standalone mongodb is defined in the docker-compose file. The docker container mounts the current project as a volume, the python app run with `FLASK_ENV: development`, it automatically refresh when code changes.

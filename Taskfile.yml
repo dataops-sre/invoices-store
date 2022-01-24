@@ -27,6 +27,12 @@ tasks:
     cmds:
       - docker-compose up --abort-on-container-exit --build invoices_store_pytests
 
+  e2e-tests:
+    summary: |
+      Run the e2e-tests locally with docker-compose
+    cmds:
+      - docker-compose up --abort-on-container-exit --build invoices_store_e2e_test
+
   docker.build:
     summary: |
       Build docker image for the app
